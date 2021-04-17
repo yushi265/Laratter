@@ -1,6 +1,6 @@
 FROM mysql:8.0
 
-ENV MYSQL_DATABASE=Laravel \
+ENV MYSQL_DATABASE=Laratter \
   MYSQL_USER=phper \
   MYSQL_PASSWORD=secret \
   MYSQL_ROOT_PASSWORD=secret \
