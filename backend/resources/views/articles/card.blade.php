@@ -5,5 +5,7 @@
         <p class="card-text">
             {{ $article->body }}
         </p>
+        <a href="{{ route('articles.edit', ['article' => $article]) }}" type="button" class="btn btn-primary">編集</a>
+        <button type="button" class="btn btn-danger">削除</button>
     </div>
 </div>

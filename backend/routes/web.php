@@ -16,4 +16,5 @@ use App\Http\Controllers\PostController;
 */
 
 Auth::routes();
-Route::get('/', [ArticleController::class,'index'])->name('index');
+Route::get('/', [ArticleController::class, 'index'])->name('index');
+Route::resource('/articles', ArticleController::class)->except(['index'])->middleware('auth');

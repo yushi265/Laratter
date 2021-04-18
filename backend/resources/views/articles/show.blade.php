@@ -1,0 +1,10 @@
+@extends('layouts.app')
+
+@section('title', '投稿詳細')
+
+@section('content')
+    <div class="container">
+        <p>投稿詳細</p>
+        @include('articles.card')
+    </div>
+@endsection

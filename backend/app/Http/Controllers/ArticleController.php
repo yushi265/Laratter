@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -26,7 +27,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -37,7 +38,12 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Article::create([
+            'user_id' => Auth::id(),
+            'body' => $request->body,
+        ]);
+
+        return redirect()->route('index');
     }
 
     /**
@@ -48,7 +54,9 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::where('id', $id)->first();
+
+        return view('articles.show', ['article' => $article]);
     }
 
     /**
@@ -59,7 +67,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::where('id', $id)->first();
+        return view('articles.edit', ['article' => $article]);
     }
 
     /**
@@ -71,7 +80,12 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::where('id', $id)->first();
+
+        $article->body = $request->body;
+        $article->save();
+
+        return redirect()->route('index');
     }
 
     /**
