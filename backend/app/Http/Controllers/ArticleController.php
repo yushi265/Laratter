@@ -96,6 +96,8 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Article::where('id', $id)->delete();
+
+        return redirect()->route('index');
     }
 }
