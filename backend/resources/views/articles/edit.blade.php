@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="container">
+        @include('articles.errors')
         <div class="card  ">
             <div class="card-body">
                 <form action="{{ route('articles.update', ['article' => $article]) }}" method="POST">
