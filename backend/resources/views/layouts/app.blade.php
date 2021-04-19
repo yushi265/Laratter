@@ -71,7 +71,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                             document.getElementById('logout-form').submit();">
+                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -90,9 +90,24 @@
             @yield('content')
         </main>
     </div>
-    
+
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"></script>
 </body>
+
+<style>
+    a {
+        text-decoration: none;
+    }
+
+    a {
+        color: black
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+
+</style>
 
 </html>
