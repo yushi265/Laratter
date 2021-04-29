@@ -44,6 +44,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"></li>
+                        <li class="nav-item">
+                            <a href="{{ route('articles.create') }}" class="nav-link">
+                                投稿する
+                            </a>
+                        </li>
 
                     </ul>
 

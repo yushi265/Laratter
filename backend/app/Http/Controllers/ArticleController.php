@@ -10,6 +10,16 @@ use App\Http\Requests\ArticleRequest;
 class ArticleController extends Controller
 {
     /**
+     * コントローラインスタンスの生成
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Article::class, 'article');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

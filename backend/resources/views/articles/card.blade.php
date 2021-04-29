@@ -7,11 +7,13 @@
                 {{ $article->body }}
             </a>
         </p>
+        @if (Auth::id() === $article->user_id )
         <a href="{{ route('articles.edit', ['article' => $article]) }}" type="button" class="btn btn-primary">編集</a>
         <form action="{{ route('articles.destroy', ['article' => $article]) }}" method="POST">
             @method('delete')
             @csrf
             <button type="submit" class="btn btn-danger">削除</button>
         </form>
+        @endif
     </div>
 </div>
