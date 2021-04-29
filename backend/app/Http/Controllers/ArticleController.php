@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ArticleRequest;
@@ -76,9 +77,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $article = Article::where('id', $id)->first();
+        // $article = Article::where('id', $id)->first();
         return view('articles.edit', ['article' => $article]);
     }
 
@@ -89,9 +90,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ArticleRequest $request, $id)
+    public function update(ArticleRequest $request, Article $article)
     {
-        $article = Article::where('id', $id)->first();
+        // $article = Article::where('id', $id)->first();
 
         $article->body = $request->body;
         $article->save();
@@ -105,9 +106,10 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        Article::where('id', $id)->delete();
+        // Article::where('id', $id)->delete();
+        $article->delete();
 
         return redirect()->route('index');
     }

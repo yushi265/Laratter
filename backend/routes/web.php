@@ -17,5 +17,5 @@ use App\Http\Controllers\PostController;
 
 Auth::routes();
 Route::get('/', [ArticleController::class, 'index'])->name('index');
-Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 Route::resource('/articles', ArticleController::class)->except(['index', 'show'])->middleware('auth');
+Route::resource('/articles', ArticleController::class)->only(['show']);
