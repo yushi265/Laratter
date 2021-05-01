@@ -8,12 +8,12 @@ use App\Models\Article;
 
 class UserController extends Controller
 {
-    public function show($id)
+    public function show($name)
     {
-        // ddd($id);
-        $user = User::where('id', $id)->first();
-        // ddd($user->followees);
-        $articles = Article::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        // ddd($name);
+        $user = User::where('name', $name)->first();
+        // ddd($user);
+        $articles = $user->articles->sortByDesc('created_at');
         return view('users.show', ['user' => $user, 'articles' => $articles]);
     }
 }

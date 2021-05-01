@@ -21,7 +21,7 @@ Route::get('/', [ArticleController::class, 'index'])->name('index');
 Route::resource('/articles', ArticleController::class)->except(['index', 'show'])->middleware('auth');
 Route::resource('/articles', ArticleController::class)->only(['show']);
 Route::prefix('users')->name('users.')->group(function() {
-    Route::get('{id}/show',[UserController::class,'show'])->name('show');
+    Route::get('/{name}',[UserController::class,'show'])->name('show');
 });
 
 Route::prefix('articles')->name('articles.')->group(function() {
