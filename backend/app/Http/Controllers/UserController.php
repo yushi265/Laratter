@@ -10,8 +10,10 @@ class UserController extends Controller
 {
     public function show($id)
     {
+        // ddd($id);
         $user = User::where('id', $id)->first();
-        $articles = Article::where('user_id', $id)->orderBy('created_at', 'desc')->get();
-        return view('maypages.show', ['user' => $user, 'articles' => $articles]);
+        // ddd($user);
+        $articles = Article::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        return view('users.show', ['user' => $user, 'articles' => $articles]);
     }
 }
