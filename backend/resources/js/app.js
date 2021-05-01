@@ -21,6 +21,7 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 import ArticleLike from './components/ArticleLike'
+// import FollowButton from './components/FollowButton'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -32,5 +33,6 @@ const app = new Vue({
     el: '#app',
     components: {
         ArticleLike,
+        // FollowButton,
     }
 });

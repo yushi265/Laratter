@@ -64,5 +64,15 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1,
             'article_id' => 4,
         ]);
+
+        DB::table('follows')->insert([
+            'followee_id' => 1,
+            'follower_id' => 2,
+        ]);
+
+        DB::table('follows')->insert([
+            'followee_id' => 2,
+            'follower_id' => 1,
+        ]);
     }
 }
