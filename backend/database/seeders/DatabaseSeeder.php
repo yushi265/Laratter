@@ -54,5 +54,15 @@ class DatabaseSeeder extends Seeder
             'created_at' => '2021-04-18 00:00:00',
             'updated_at' => '2021-04-18 00:00:00',
         ]);
+
+        DB::table('likes')->insert([
+            'user_id' => 1,
+            'article_id' => 3,
+        ]);
+
+        DB::table('likes')->insert([
+            'user_id' => 1,
+            'article_id' => 4,
+        ]);
     }
 }

@@ -15,5 +15,10 @@
             <button type="submit" class="btn btn-danger">削除</button>
         </form>
         @endif
+        <article-like
+            :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
+            :initial-likes-count='@json($article->likes->count())'
+        >
+        </article-like>
     </div>
 </div>
