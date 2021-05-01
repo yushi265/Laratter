@@ -15,9 +15,15 @@
 
 <script>
   export default {
+    props: {
+        initialFollowedBy: {
+            type: Boolean,
+            default: false,
+        }
+    },
     data() {
       return {
-        isFollowedBy: false,
+        isFollowedBy: this.initialFollowedBy,
       }
     },
     computed: {

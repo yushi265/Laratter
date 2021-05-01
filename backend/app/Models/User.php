@@ -44,11 +44,18 @@ class User extends Authenticatable
 
     public function followees(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'follows', 'followee_id', 'follower_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followee_id')->withTimestamps();
     }
 
     public function followers(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followee_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'follows', 'followee_id', 'follower_id')->withTimestamps();
+    }
+
+    public function isFollowedBy(?User $user): bool
+    {
+        return $user
+                ? (bool)$this->followers->where('id', $user->id)->count()
+                : false;
     }
 }
