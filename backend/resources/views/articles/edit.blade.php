@@ -1,8 +1,9 @@
-@extends('layouts.app')
+@extends('app')
 
 @section('title', '投稿編集')
 
 @section('content')
+@include('nav')
     <div class="container">
         @include('articles.errors')
         <div class="card  ">

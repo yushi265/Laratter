@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ArticleRequest;
 
@@ -39,7 +40,11 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $allTagNames = Tag::all()->map(function($tag) {
+            return ['text' => $tag->name];
+        });
+
+        return view('articles.create', ['allTagNames' => $allTagNames]);
     }
 
     /**
@@ -48,12 +53,21 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ArticleRequest $request)
+    public function store(ArticleRequest $request, Article $article)
     {
-        Article::create([
-            'user_id' => Auth::id(),
-            'body' => $request->body,
-        ]);
+        // Article::create([
+        //     'user_id' => Auth::id(),
+        //     'body' => $request->body,
+        // ]);
+
+        $article->fill($request->all());
+        $article->user_id = Auth::id();
+        $article->save();
+
+        $request->tags->each(function($tagName) use ($article) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $article->tags()->attach($tag);
+        });
 
         return redirect()->route('index');
     }
@@ -79,8 +93,20 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        $tagNames = $article->tags->map(function($tag) {
+            return ['text' => $tag->name];
+        });
+
+        $allTagNames = Tag::all()->map(function($tag) {
+            return ['text' => $tag->name];
+        });
+        // ddd($allTagNames);
         // $article = Article::where('id', $id)->first();
-        return view('articles.edit', ['article' => $article]);
+        return view('articles.edit', [
+            'article' => $article,
+            'tagNames' => $tagNames,
+            'allTagNames' => $allTagNames,
+        ]);
     }
 
     /**
@@ -94,8 +120,13 @@ class ArticleController extends Controller
     {
         // $article = Article::where('id', $id)->first();
 
-        $article->body = $request->body;
-        $article->save();
+        $article->fill($request->all())->save();
+
+        $article->tags()->detach();
+        $request->tags->each(function($tagName) use ($article) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $article->tags()->attach($tag);
+        });
 
         return redirect()->route('index');
     }
