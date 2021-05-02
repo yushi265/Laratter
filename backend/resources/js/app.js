@@ -22,6 +22,7 @@ window.Vue = require('vue').default;
 
 import ArticleLike from './components/ArticleLike'
 import FollowButton from './components/FollowButton'
+import ArticleTagsInput from './components/ArticleTagsInput'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -34,5 +35,6 @@ const app = new Vue({
     components: {
         ArticleLike,
         FollowButton,
+        ArticleTagsInput,
     }
 });
