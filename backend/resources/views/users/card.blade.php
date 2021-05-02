@@ -5,6 +5,8 @@
         </p>
         <follow-button
             :initial-followed-by='@json($user->isFollowedBy(Auth::user()))'
+            :authorized='@json(Auth::check())'
+            endpoint='{{ route('users.follow', ['name' => $user->name])}}'
         >
         </follow-button>
     </div>

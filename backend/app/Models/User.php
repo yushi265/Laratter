@@ -49,7 +49,7 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
 
-    public function followees(): BelongsToMany
+    public function followings(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followee_id')->withTimestamps();
     }

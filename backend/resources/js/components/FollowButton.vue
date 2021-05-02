@@ -7,6 +7,7 @@
       <i
         class="mr-1"
         :class="buttonIcon"
+        @click="clickFollow"
       ></i>
       {{ buttonText }}
     </button>
@@ -19,6 +20,13 @@
         initialFollowedBy: {
             type: Boolean,
             default: false,
+        },
+        authorized: {
+            type: Boolean,
+            default: false,
+        },
+        endpoint: {
+            type: String,
         }
     },
     data() {
@@ -42,6 +50,26 @@
           ? 'フォロー中'
           : 'フォロー'
       },
+    },
+    methods: {
+        clickFollow() {
+            if (!this.authorized) {
+                alert('フォロー機能を使用するにはログインしてください')
+                return
+            }
+
+            this.isFollowedBy ? this.unfollow() : this.follow()
+        },
+        async follow() {
+            const response = await axios.put(this.endpoint)
+
+            this.isFollowedBy = true
+        },
+        async unfollow() {
+            const response = await axios.delete(this.endpoint)
+
+            this.isFollowedBy = false
+        }
     },
   }
 </script>
