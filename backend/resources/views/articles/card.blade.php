@@ -1,6 +1,10 @@
 <div class="card mt-3 mb-3">
     <div class="card-body">
-        <h5 class="card-title">{{ $article->user->name }}</h5>
+        <h5 class="card-title">
+            <a href="{{ route('users.show', ['name' => $article->user->name])}}">
+                {{ $article->user->name }}
+            </a>
+        </h5>
         <p>{{ $article->created_at }}</p>
         <p class="card-text">
             <a href="{{ route('articles.show', ['article' => $article]) }}">

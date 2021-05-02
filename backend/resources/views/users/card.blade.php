@@ -9,5 +9,7 @@
             endpoint='{{ route('users.follow', ['name' => $user->name])}}'
         >
         </follow-button>
+        <a href="">{{$user->count_followings}}フォロー</a>
+        <a href="">{{$user->count_followers}}フォロワー</a>
     </div>
 </div>

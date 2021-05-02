@@ -1924,8 +1924,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context.sent;
                 _this.isLikedBy = true;
+                _this.countLikes = response.data.countLikes;
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -1948,8 +1949,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 2:
                 response = _context2.sent;
                 _this2.isLikedBy = false;
+                _this2.countLikes = response.data.countLikes;
 
-              case 4:
+              case 5:
               case "end":
                 return _context2.stop();
             }
