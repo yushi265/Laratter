@@ -4,6 +4,8 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
+Route::prefix('login')->name('login.')->group(function () {
+    Route::get('/{provider}', [LoginController::class, 'redirectToProvider'])->name('{provider}');
+    Route::get('/{provider}/callback', [LoginController::class],'handleProviderCallback')->name('{provider}.callback');
+});
+Route::prefix('register')->name('register.')->group(function () {
+    Route::get('/{provider}', [RegisterController::class],'showProviderUserRegistrationForm')->name('{provider}');
+    Route::post('/{provider}', [RegisterController::class], 'registerProviderUser')->name('{provider}');
+});
 Route::get('/', [ArticleController::class, 'index'])->name('index');
 Route::resource('/articles', ArticleController::class)->except(['index', 'show'])->middleware('auth');
 Route::resource('/articles', ArticleController::class)->only(['show']);
